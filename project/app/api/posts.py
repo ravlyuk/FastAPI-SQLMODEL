@@ -6,7 +6,7 @@ from sqlalchemy import select
 from app.models import Post, User, PostCreate, PostUpdate
 from app.depends import CurrentUser, Session
 
-post_router = APIRouter()
+post_router = APIRouter(tags=['posts'])
 
 
 @post_router.get("/posts", response_model=list[Post])

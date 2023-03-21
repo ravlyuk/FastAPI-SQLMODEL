@@ -6,7 +6,7 @@ from sqlalchemy import select, and_, func
 from app.models import Post
 from app.depends import CurrentUser, Session
 
-analytic_router = APIRouter()
+analytic_router = APIRouter(tags=['statistic'])
 
 
 @analytic_router.get("/analytics/", response_model=list[Post])

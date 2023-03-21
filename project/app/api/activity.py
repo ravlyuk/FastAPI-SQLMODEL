@@ -4,7 +4,7 @@ from sqlalchemy import select
 from app.depends import CurrentUser, Session
 from app.models import Activity
 
-activity_router = APIRouter()
+activity_router = APIRouter(tags=['statistic'])
 
 
 @activity_router.get("/activity/")

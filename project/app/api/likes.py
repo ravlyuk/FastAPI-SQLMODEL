@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from app.models import Post
 from app.depends import CurrentUser, Session
 
-like_router = APIRouter()
+like_router = APIRouter(tags=['likes'])
 
 
 @like_router.post("/like/{post_id}", response_model=Post)
