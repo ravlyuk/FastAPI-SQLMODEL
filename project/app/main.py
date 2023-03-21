@@ -3,7 +3,7 @@ from fastapi.openapi.models import Response
 
 from starlette.requests import Request
 
-from .api import (activity_router, analytic_router, like_router, post_router, user_router, auth_router)
+from .api import (activity_router, analytics_router, like_router, post_router, user_router, auth_router)
 from .config import API_V1_STR
 from .services import set_last_activity, get_user_id
 
@@ -19,5 +19,5 @@ async def activity_monitor(request: Request, call_next) -> Response:
     return response
 
 
-for api_router in auth_router, user_router, activity_router, post_router, like_router, analytic_router:
+for api_router in auth_router, user_router, post_router, like_router, activity_router, analytics_router:
     app.include_router(api_router, prefix=API_V1_STR)

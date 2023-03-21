@@ -6,10 +6,10 @@ from sqlalchemy import select, and_, func
 from app.models import Post
 from app.depends import CurrentUser, Session
 
-analytic_router = APIRouter(tags=['statistic'])
+analytics_router = APIRouter(tags=['statistic'])
 
 
-@analytic_router.get("/analytics/", response_model=list[Post])
+@analytics_router.get("/analytics/", response_model=list[Post])
 async def get_analytics(user: CurrentUser, session: Session,  date_from: date = Query(...), date_to: date = Query(...)):
     result = await session.execute(select(Post).where(
         and_(Post.created_at >= date_from, Post.created_at <= date_to)
