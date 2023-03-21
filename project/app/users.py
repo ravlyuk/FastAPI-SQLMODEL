@@ -12,6 +12,7 @@ from fastapi_users.authentication import (
 from fastapi_users_db_sqlmodel import SQLModelUserDatabase, SQLModelUserDatabaseAsync
 from sqlmodel.ext.asyncio.session import AsyncSession
 
+from .config import API_V1_STR
 from .services import set_last_activity
 from .db import get_async_session
 from .models import User
@@ -55,7 +56,7 @@ async def get_user_manager(user_db: SQLModelUserDatabase = Depends(get_user_db))
     yield UserManager(user_db)
 
 
-bearer_transport = BearerTransport(tokenUrl="api/v1/auth/jwt/login")
+bearer_transport = BearerTransport(tokenUrl=API_V1_STR + "/auth/jwt/login")
 
 
 def get_jwt_strategy() -> JWTStrategy:

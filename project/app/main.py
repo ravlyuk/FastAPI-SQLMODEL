@@ -4,10 +4,10 @@ from fastapi.openapi.models import Response
 from starlette.requests import Request
 
 from .api import (activity_router, analytic_router, like_router, post_router, user_router)
+from .config import API_V1_STR
 from .services import set_last_activity, get_user_id
 
 app = FastAPI(title="FastAPI Simple Blog", description="Test task for Mint company.", version="0.1.0")
-API_V1_STR = '/api/v1'
 
 
 @app.middleware("http")
