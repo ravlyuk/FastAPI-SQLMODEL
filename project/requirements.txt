@@ -3,5 +3,4 @@ asyncpg==0.27.0
 fastapi==0.95
 fastapi-users-db-sqlmodel==0.2.0
 uvicorn==0.21.1
-
-
+flake8==6.0.0
