@@ -3,4 +3,4 @@ repos:
     rev: v2.4.0
     hooks:
       - id: flake8
-        args: [ --config,  project/setup.cfg ]
+        args: [ --config,  setup.cfg ]
