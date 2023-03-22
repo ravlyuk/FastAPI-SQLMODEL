@@ -1,2 +1,2 @@
-API_V1_STR = '/api/v1'
+API_STR = '/api/v1'
 TOKEN_LIFETIME_SECOND = 3600 * 24

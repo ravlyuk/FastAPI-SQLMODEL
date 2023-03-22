@@ -6,7 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .config import API_V1_STR
+from .config import API_STR
 from .db import engine
 from .models import Activity, User
 
@@ -36,8 +36,8 @@ def get_user_id(request) -> str | None:
     authorization = request.headers.get('authorization')
 
     ignore_endpoints = (
-        API_V1_STR + '/auth/jwt/login',
-        API_V1_STR + '/auth/register'
+        API_STR + '/auth/jwt/login',
+        API_STR + '/auth/register'
     )
 
     if not authorization or endpoint in ignore_endpoints:
