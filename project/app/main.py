@@ -11,3 +11,4 @@ for api_router in auth_router, user_router, post_router, like_router, activity_r
     app.include_router(api_router, prefix=API_STR)
 
 
+

@@ -21,7 +21,7 @@ RUN apt-get update \
 RUN pip install --upgrade pip
 RUN pip install flake8
 COPY . .
-RUN  flake8 --config setup.cfg .
+RUN  flake8 --config .flake8 .
 
 # install dependencies
 COPY ./requirements.txt .
