@@ -26,6 +26,7 @@ Important! The docker image will not be created if it contains invalid code by t
 4) `. ./.venv/bin/activate`
 5) `pip install -U pip && pip install -r requirements.txt`
 6) `pip install make`
+7) `pip install pre-commit`
 7) `make init` init migration, ONLY for first run
 8) `make migrate`
 9) `make upgrade`
@@ -36,3 +37,6 @@ Important! The docker image will not be created if it contains invalid code by t
 http://0.0.0.0:8004/docs
 
 or use postman collection `postman_collection.json`
+
+### Init pre-commit to git repository
+`pre-commit install`
