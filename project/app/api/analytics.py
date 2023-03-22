@@ -10,7 +10,7 @@ analytics_router = APIRouter(tags=['statistic'])
 
 
 @analytics_router.get("/analytics/", response_model=list[Post])
-async def get_analytics(user: CurrentUser, session: Session,  date_from: date = Query(...), date_to: date = Query(...)):
+async def get_analytics(user: CurrentUser, session: Session, date_from: date = Query(...), date_to: date = Query(...)):
     result = await session.execute(select(Post).where(
         and_(Post.created_at >= date_from, Post.created_at <= date_to)
     ).order_by(

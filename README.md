@@ -1,7 +1,21 @@
 # FastAPI Simple Blog
 
+## About project:
+
+Simple Blog with components:
+
+- posts
+- likes/dislikes
+- statistic
+- activity
+- users
+- auth JWT token
+
+Important! The docker image will not be created if it contains invalid code by the Flake8 validator.
+
 ### Used libs:
-- fastapi 
+
+- fastapi
 - fastapi-users-db-sqlmodel
 - alembic
 
@@ -20,6 +34,7 @@ Steps to run project on dev's machine:
 10) `fab run`
 
 ### Test API:
+
 http://0.0.0.0:8004/docs
 
 or use postman collection `postman_collection.json`
