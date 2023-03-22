@@ -1,8 +1,6 @@
 # FastAPI Simple Blog
 
-## About project:
-
-Simple Blog with components:
+### Blog components
 
 - posts
 - likes/dislikes
@@ -13,14 +11,14 @@ Simple Blog with components:
 
 Important! The docker image will not be created if it contains invalid code by the Flake8 validator.
 
-### Used libs:
+### Used libs
 
 - fastapi
 - fastapi-users-db-sqlmodel
 - alembic
 
-Steps to run project on dev's machine:
-------------------------------
+### Steps to run project on dev's machine
+
 
 1) Use python 3.11
 2) clone repo
