@@ -10,3 +10,4 @@ app.middleware("http")(activity_monitor)
 for api_router in auth_router, user_router, post_router, like_router, activity_router, analytics_router:
     app.include_router(api_router, prefix=API_STR)
 
+
