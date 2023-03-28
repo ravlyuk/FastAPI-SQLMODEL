@@ -9,9 +9,9 @@ like_router = APIRouter(tags=['likes'])
 
 @like_router.post("/like/{post_id}", response_model=Post)
 async def add_like(post_id: int, user: CurrentUser, session: Session):
-    return add_like_service(post_id, session)
+    return await add_like_service(post_id, session)
 
 
 @like_router.post("/dislike/{post_id}", response_model=Post)
 async def add_dislike(post_id: int, user: CurrentUser, session: Session):
-    return add_dislike_service(post_id, session)
+    return await add_dislike_service(post_id, session)

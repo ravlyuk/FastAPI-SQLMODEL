@@ -25,13 +25,14 @@ class Activity(SQLModel, table=True):
 class PostBase(SQLModel):
     title: str
     content: str
+    author: Optional[UUID4]
 
 
 class Post(PostBase, table=True):
     id: int = Field(default=None, primary_key=True)
     likes: Optional[int] = Field(default=0)
     dislikes: Optional[int] = Field(default=0)
-    author: Optional[UUID4]
+
     created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
     updated_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
 

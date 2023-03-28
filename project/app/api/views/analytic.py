@@ -11,4 +11,4 @@ analytic_router = APIRouter(tags=['statistic'])
 
 @analytic_router.get("/analytic/", response_model=list[Post])
 async def get_analytics(user: CurrentUser, session: Session, date_from: date = Query(...), date_to: date = Query(...)):
-    return analytic_service(session, date_from, date_to)
+    return await analytic_service(session, date_from, date_to)

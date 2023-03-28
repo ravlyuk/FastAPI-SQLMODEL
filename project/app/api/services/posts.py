@@ -22,7 +22,7 @@ async def get_posts_service(session) -> [Post]:
     ]
 
 
-async def add_post_service(post, user, session) -> Post:
+async def add_post_service(post, session, user) -> Post:
     post = Post(title=post.title, content=post.content, author=user.id)
     session.add(post)
     await session.commit()
@@ -30,8 +30,9 @@ async def add_post_service(post, user, session) -> Post:
     return post
 
 
-async def delete_post_service(post_id, user, session) -> dict:
+async def delete_post_service(post_id, session, user) -> dict:
     post = await session.get(Post, post_id)
+
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     elif post.author != user.id:
@@ -42,10 +43,13 @@ async def delete_post_service(post_id, user, session) -> dict:
     return {"deleted": True}
 
 
-async def update_post_service(post_id, post, session) -> Post:
+async def update_post_service(post_id, post, session, user) -> Post:
     db_post = await session.get(Post, post_id)
+
     if not db_post:
         raise HTTPException(status_code=404, detail="Post not found")
+    elif db_post.author != user.id:
+        raise HTTPException(status_code=401, detail="Forbidden. The post belongs to another user")
 
     post_data = post.dict(exclude_unset=True)
     for key, value in post_data.items():
