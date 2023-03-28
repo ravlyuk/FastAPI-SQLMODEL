@@ -1,25 +1,19 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import HTTPException
 
 from app.models import Post
-from app.depends import CurrentUser, Session
-
-like_router = APIRouter(tags=['likes'])
 
 
-@like_router.post("/like/{post_id}", response_model=Post)
-async def add_like(post_id: int, user: CurrentUser, session: Session):
+async def add_like_service(post_id, session):
     post = await session.get(Post, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     new_value = post.likes + 1
     setattr(post, 'likes', new_value)
     await session.commit()
-
     return post
 
 
-@like_router.post("/dislike/{post_id}", response_model=Post)
-async def add_dislike(post_id: int, user: CurrentUser, session: Session):
+async def add_dislike_service(post_id, session):
     post = await session.get(Post, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
