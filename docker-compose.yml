@@ -4,15 +4,16 @@ services:
 
   web:
     build: ./project
-    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    command: uvicorn app.main:app --workers 2 --host 0.0.0.0 --port 8000 --reload
     volumes:
-      - ./project:/usr/src/app
+      - ./project/app:/home/app/web/app
     ports:
       - "8004:8000"
     depends_on:
       - db
     env_file:
       - ./.env.dev
+    restart: on-failure
 
   db:
     image: postgres:13.4

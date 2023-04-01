@@ -10,5 +10,5 @@ migrate:
 	docker-compose exec -it web sh -c 'cd app && alembic revision --autogenerate -m "New"'
 upgrade:
 	docker-compose exec -it web sh -c 'cd app && alembic upgrade head'
-downgrade:
+flush:
 	docker-compose exec -it web sh -c 'cd app && alembic downgrade base'

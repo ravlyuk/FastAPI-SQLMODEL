@@ -1,23 +1,6 @@
-from fastapi import HTTPException
-
-from app.models import Post
-
-
-async def add_like_service(post_id, session):
-    post = await session.get(Post, post_id)
-    if not post:
-        raise HTTPException(status_code=404, detail="Post not found")
-    new_value = post.likes + 1
-    setattr(post, 'likes', new_value)
+async def add_like_or_dislike_service(post_like_create, postmodel, session):
+    post_like_create = postmodel(post_id=post_like_create.post_id, user_id=post_like_create.user_id)
+    session.add(post_like_create)
     await session.commit()
-    return post
-
-
-async def add_dislike_service(post_id, session):
-    post = await session.get(Post, post_id)
-    if not post:
-        raise HTTPException(status_code=404, detail="Post not found")
-    new_value = post.dislikes + 1
-    setattr(post, 'dislikes', new_value)
-    await session.commit()
-    return post
+    await session.refresh(post_like_create)
+    return post_like_create

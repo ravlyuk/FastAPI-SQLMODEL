@@ -43,3 +43,18 @@ class PostCreate(PostBase):
 
 class PostUpdate(PostBase):
     pass
+
+
+class PostLikeBase(SQLModel):
+    post_id: int
+    user_id: int
+
+
+class PostLike(PostLikeBase, table=True):
+    id: int = Field(default=None, primary_key=True)
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+
+
+class PostDislike(PostLikeBase, table=True):
+    id: int = Field(default=None, primary_key=True)
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
