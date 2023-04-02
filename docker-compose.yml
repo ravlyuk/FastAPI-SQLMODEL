@@ -4,11 +4,11 @@ services:
 
   web:
     build: ./project
-    command: uvicorn app.main:app --workers 2 --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --workers 2 --host 0.0.0.0 --port 8004 --reload
     volumes:
       - ./project/app:/home/app/web/app
     ports:
-      - "8004:8000"
+      - "8004:8004"
     depends_on:
       - db
     env_file:

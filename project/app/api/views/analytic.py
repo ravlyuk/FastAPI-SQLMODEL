@@ -3,7 +3,6 @@ from datetime import date
 from fastapi import APIRouter, Query
 
 from app.api.services.analytic import analytic_service
-from app.models import PostLike
 from app.depends import CurrentUser, Session
 
 analytic_router = APIRouter(tags=['statistic'])

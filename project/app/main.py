@@ -4,7 +4,7 @@ from .api.views import (activity_router, analytic_router, like_router, post_rout
 from .middlewares import activity_monitor
 from .config import API_STR
 
-app = FastAPI(title="FastAPI Simple Blog", description="Test task for Mint company.", version="0.1.0")
+app = FastAPI(title="FastAPI Simple Blog", description="Test task.", version="0.1.0")
 app.middleware("http")(activity_monitor)
 
 for api_router in auth_router, user_router, post_router, like_router, activity_router, analytic_router:

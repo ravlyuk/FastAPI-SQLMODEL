@@ -2,7 +2,7 @@ from typing import List, Dict
 
 import sqlalchemy as sa
 
-from app.models import PostLike, PostDislike
+from app.models import Like, Dislike
 
 
 async def analytic_service(session, date_from, date_to) -> dict[str, List[Dict[str, int]]]:
@@ -10,12 +10,12 @@ async def analytic_service(session, date_from, date_to) -> dict[str, List[Dict[s
         await session.execute(
             sa.select(
                 [
-                    sa.cast(PostLike.created_at, sa.Date).label('date'),
-                    sa.func.count(PostLike.id),
+                    sa.cast(Like.created_at, sa.Date).label('date'),
+                    sa.func.count(Like.id),
                 ]
-            ).filter(PostLike.created_at >= date_from)
-            .filter(PostLike.created_at <= date_to)
-            .group_by(sa.cast(PostLike.created_at, sa.Date))
+            ).filter(Like.created_at >= date_from)
+            .filter(Like.created_at <= date_to)
+            .group_by(sa.cast(Like.created_at, sa.Date))
         )
 
     ).all()
@@ -24,12 +24,12 @@ async def analytic_service(session, date_from, date_to) -> dict[str, List[Dict[s
         await session.execute(
             sa.select(
                 [
-                    sa.cast(PostDislike.created_at, sa.Date).label('date'),
-                    sa.func.count(PostDislike.id),
+                    sa.cast(Dislike.created_at, sa.Date).label('date'),
+                    sa.func.count(Dislike.id),
                 ]
-            ).filter(PostDislike.created_at >= date_from)
-            .filter(PostDislike.created_at <= date_to)
-            .group_by(sa.cast(PostDislike.created_at, sa.Date))
+            ).filter(Dislike.created_at >= date_from)
+            .filter(Dislike.created_at <= date_to)
+            .group_by(sa.cast(Dislike.created_at, sa.Date))
         )
 
     ).all()

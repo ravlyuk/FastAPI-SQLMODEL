@@ -10,46 +10,26 @@ async def get_posts_service(session) -> [Post]:
     result = await session.execute(select(Post))
     posts = result.scalars().all()
 
-    return [
-        Post(
-            title=post.title,
-            content=post.content,
-            likes=post.likes,
-            id=post.id,
-            author=post.author
-
-        ) for post in posts
-    ]
+    return posts
 
 
 async def add_post_service(post, session, user) -> Post:
-    post = Post(title=post.title, content=post.content, author=user.id)
+    post = Post(title=post.title, content=post.content, user=user)
     session.add(post)
     await session.commit()
     await session.refresh(post)
     return post
 
 
-async def delete_post_service(post_id, session, user) -> dict:
-    post = await session.get(Post, post_id)
-
-    if not post:
-        raise HTTPException(status_code=404, detail="Post not found")
-    elif post.author != user.id:
-        raise HTTPException(status_code=401, detail="Forbidden. The post belongs to another user")
-
+async def delete_post_service(post_id: int, session, user) -> dict:
+    post = await get_post(session, post_id, user)
     await session.delete(post)
     await session.commit()
     return {"deleted": True}
 
 
 async def update_post_service(post_id, post, session, user) -> Post:
-    db_post = await session.get(Post, post_id)
-
-    if not db_post:
-        raise HTTPException(status_code=404, detail="Post not found")
-    elif db_post.author != user.id:
-        raise HTTPException(status_code=401, detail="Forbidden. The post belongs to another user")
+    db_post = await get_post(session, post_id, user)
 
     post_data = post.dict(exclude_unset=True)
     for key, value in post_data.items():
@@ -61,3 +41,14 @@ async def update_post_service(post_id, post, session, user) -> Post:
     await session.commit()
     await session.refresh(db_post)
     return db_post
+
+
+async def get_post(session, post_id: int, user) -> Post:
+    post = await session.get(Post, post_id)
+
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+    elif post.user_id != user.id:
+        raise HTTPException(status_code=401, detail="Forbidden. The post belongs to another user")
+
+    return post
