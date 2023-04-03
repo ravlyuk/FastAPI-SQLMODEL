@@ -29,7 +29,7 @@ Important! The docker image will not be created if it contains invalid code by t
 7) `make init` init migration, ONLY for first run
 8) `make migrate`
 9) `make upgrade`
-10) `fab run`
+10) `make up`
 
 ### Test API:
 
